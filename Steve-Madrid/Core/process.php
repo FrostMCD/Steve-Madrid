@@ -5,8 +5,8 @@ $metodo_aceptado = 'POST';
 $usuario_correcto = "Admin";
 $password_correcto = "Admin";
 
-$txt_usuario = $_POST["txt_usuario"];
-$txt_password = $_POST["txt_password"];
+$txt_usuario = (( isset($_POST["txt_usuario"])) ? $_POST["txt_usuario"] : null);
+$txt_password = (( isset($_POST["txt_password"])) ? $_POST["txt_password"] : null) ;
 $token = "";
 
 if(in_array($_SERVER["HTTP_HOST"],$host_aceptados) ){
@@ -26,7 +26,7 @@ if(in_array($_SERVER["HTTP_HOST"],$host_aceptados) ){
                         $codigo_estado = 200;
                         $texto_estado = "Ok";
                         list($usec,$sec) = explode(' ',microtime());
-                        $token = base64_encode(date("Y-m-d H:i:s",$sec).substr($user,1));
+                        $token = base64_encode(date("Y-m-d H:i:s",$sec).substr($txt_usuario,1));
                     }else{
                         //El valor ingresado del campo password no es correcto
                         $ruta = "";
